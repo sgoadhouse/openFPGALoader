@@ -147,7 +147,7 @@ bitstreams.
 
 [Added by sgoadhouse]
 
-The Install instructions do not cover building on CentOS 7 so adding here the instructions that worked for me. The key was that the g++ version that was the default for Centos 7 was not sufficient, although that was far from obvious from the error message being received. I kept getting errors with regex functions which do not appear to work until version g++ 4.9.0, although headers appear in the earlier version that I had and almost compile.
+The Install instructions do not cover building on CentOS 7 so adding here the instructions that worked for me. The key was that the g++ version that was the default for Centos 7 was not sufficient, although that was far from obvious from the error messages being received. I kept getting errors with regex functions which do not appear to work until version g++ 4.9.0, although headers appear in the earlier version that I had and almost compile.
 
 - To install a newer version of g++:
 ```
@@ -168,7 +168,6 @@ cd build
 scl enable devtoolset-7 bash
 cmake3 ..
 cmake3 --build .
-sudo cmake3 --install .
 ```
 - If the build completes without error and you want to install, use:
 ```
