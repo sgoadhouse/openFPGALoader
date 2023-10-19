@@ -306,6 +306,27 @@ int FTDIpp_MPSSE::init(unsigned char latency, unsigned char bitmask_mode,
 			}
 		}
 
+		printInfo("FTDI Interface: " + std::to_string(_ftdi->interface));		
+		// Switch the JTAG mux on the BCP if trying to access port 1
+		if (_ftdi->interface == 1) {
+		  ////_cable.bit_high_dir |= 0xc0;
+		  
+		  // For mux = 2
+		  //_cable.bit_low_dir |= 0xc0;
+		  //_cable.bit_low_val |= 0x80;
+		  //_cable.bit_low_val &= ~(1 << 6);
+		  ////_cable.bit_high_val |= 0x80;
+		  ////_cable.bit_high_val &= ~(1 << 6);
+		  
+		  // For mux = 3
+		  _cable.bit_low_dir |= 0xd0;
+		  _cable.bit_low_val |= 0xc0;
+		  ////_cable.bit_high_dir |= 0xd0;
+		  ////_cable.bit_high_val |= 0xc0;
+		}
+		printInfo("CABLE Low  Val: " + std::to_string(_cable.bit_low_val) + " Dir: "  + std::to_string(_cable.bit_low_dir));
+		printInfo("CABLE High Val: " + std::to_string(_cable.bit_high_val) + " Dir: "  + std::to_string(_cable.bit_high_dir));
+
 		int to_wr = 3;
 
 		buf_cmd[1] = _cable.bit_low_val;  // 0xe8;
