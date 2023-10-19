@@ -145,27 +145,32 @@ bitstreams.
 
 ## Building on CentOS 7
 
-[Added by sdg]
+[Added by sgoadhouse]
 
-The Install instructions do not cover building on CentOS 7 so adding the instructions that worked for me. The key was that the g++ version that was the default for Centos 7 was not sufficient, although that was far from obvious from the error message being received. I kept getting errors with regex functions which do not appear to work until version g++ 4.9.0, although headers appear in the earlier version that I had and almost compile.
+The Install instructions do not cover building on CentOS 7 so adding here the instructions that worked for me. The key was that the g++ version that was the default for Centos 7 was not sufficient, although that was far from obvious from the error message being received. I kept getting errors with regex functions which do not appear to work until version g++ 4.9.0, although headers appear in the earlier version that I had and almost compile.
 
 - To install a newer version of g++:
 ```
-sudo yum install -y centos-release-scl and sudo yum install -y devtoolset-7
+sudo yum install -y centos-release-scl
+sudo yum install -y devtoolset-7
 ```
-   - Then to build with it, need to run `scl enable devtoolset-7 bash`
-   - I pretty much settled on this version because I found a post online using it as an example and it worked for me. Other devtoolsets may work if you prefer a different one.
+   - Then to build with it, need to first run `scl enable devtoolset-7 bash`
+   - I pretty much settled on this version because I found a post online using it as an example and it worked for me. Other devtoolsets may work if you prefer a different one as long as g++ version >= 4.9.0.
 - Also, need to install `libftdi1` which was not obvious how on CentOS7
    - To install libftdi1 : `sudo yum install libftdi-devel`
 - Also need `cmake3`, so install with: `sudo yum install cmake3`
 - Then, to build this code, use:
 ```
-git clone https://github.com/trabucayre/openFPGALoader GIT-openFPGALoader
+git clone https://github.com/sgoadhouse/openFPGALoader GIT-openFPGALoader
 cd GIT-openFPGALoader
 mkdir build
 cd build
 scl enable devtoolset-7 bash
 cmake3 ..
 cmake3 --build .
+sudo cmake3 --install .
+```
+- If the build completes without error and you want to install, use:
+```
 sudo cmake3 --install .
 ```
